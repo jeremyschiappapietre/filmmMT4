@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Application Symfony 4.4 Deploy with Heroku By SCHIAPPAPIETRE Jérémy MT4{% endblock %}
+
+{% block body %}
+    <h2 style='text-align:center;margin:3%;margin-top:3%'>Application Symfony 4.4 Deploy with Heroku By SCHIAPPAPIETRE Jérémy MT4</h2>
+    <div style='border:2px solid #818181;border-radius:2%;width :40%; height:18em; text-align:center;margin-left:30%;background-color:#F5F5F5'>
+        <p style='margin:3%'>Filtrer :</p>
+        <p >Nom du film : <a href="{{ path('film_title_asc') }}" class='btn btn-success'>Ordre Croissant</a>   <a href="{{ path('film_title_desc')}}" class='btn btn-danger'>Ordre Décroissant</a></p><br>
+        <p>Genre du film : <a href="{{ path('film_category_asc') }}"class='btn btn-success'>Ordre Croissant</a>   <a href="{{ path('film_category_desc') }}" class='btn btn-danger'>Ordre Décroissant</a></p><br>
+        <p>Nombre de location : <a href="{{ path('film_rental_asc') }}" class='btn btn-success'>Ordre Croissant</a>   <a href="{{ path('film_rental_desc') }}" class='btn btn-danger'>Ordre Décroissant</a></p><br>
+    </div>
+    
+
+    <table class="table" class="table table-striped" style='margin:0 auto;width:70%;margin-top:3%'>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Prix Location</th>
+                <th>Classement</th>
+                <th>Catégorie</th>
+                <th>Nombre de Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for film_category in film_categories %}
+            <tr>
+                {# <td>{{ film_category.filmId }}</td> #}
+                <td>{{ film_category.title }}</td>
+                <td>{{ film_category.rental_rate }}</td>
+                <td>{{ film_category.rating }}</td>
+                <td>{{ film_category.name }}</td>
+                <td>{{ film_category.rental_number }}</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{knp_pagination_render(film_categories)}}
+
+    {# <a href="{{ path('film_category_new') }}">Create new</a> #}
+{% endblock %}
